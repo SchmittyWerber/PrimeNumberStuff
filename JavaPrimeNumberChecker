@@ -93,7 +93,7 @@ public class TestClass {
 			System.exit(0);
 		}
 		else {
-			System.out.println(tryAgain + " is an invalid selection."
+			System.out.println(tryAgain + " is an invalid selection. "
 					+ "Closing application...");
 			System.exit(0);
 		}
