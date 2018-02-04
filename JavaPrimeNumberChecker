@@ -20,15 +20,12 @@ public class TestClass {
 // ----------------------------------------------------------------------------------
 
 	//used to determine if the entered characters are numeric
-	public static boolean isNumeric(String str)
-	{
-		try
-	    {
-	      double d = Double.parseDouble(str);
-	    }
-	    catch(NumberFormatException nfe)
-	    {
-	      return false;
+	public static boolean isNumeric(String str) {
+		try {
+			double d = Double.parseDouble(str);
+		}
+		catch(NumberFormatException nfe) {
+			return false;
 	    }
 	    return true;  
 	}
@@ -40,7 +37,6 @@ public class TestClass {
 		//here we declare the scanner and variables
 		String primeInputStr ="";
 		double primeInput = 1;
-		double primeChecker = 2;
 		boolean result = false;
 		
 		//here is where we ask for and interpret user input
@@ -58,16 +54,16 @@ public class TestClass {
 		/*this loop divides the input by every number from 2 to the sqrt of itself and checks 
 		 * to see if there is a remainder. if there is no remainder we can infer the number 
 		 * is not prime as it is wholly divisible by a number other than 1 and it's own value*/
-		while (primeChecker <= Math.sqrt(primeInput) && primeInput != 1 && primeInput != 0) {
-			if (primeInput % primeChecker == 0) { 
+		for (double i = 2; i <= Math.sqrt(primeInput); i++) {
+			if (primeInput % i == 0) { 
 				result = false;
-				primeChecker = primeInput;
+				i = primeInput;
 			}
 			else {
+				i = i + 1;
 				result = true;
-				primeChecker = primeChecker + 1;
-			}		
-	    }
+			}
+		}
 		
 		//gives user feedback once the number has been determined to be prime or not
 		if (result == false) System.out.println("It is not prime.");
@@ -83,7 +79,7 @@ public class TestClass {
 		String tryAgain="";
 
 		//here we interpret user input to see if they would like to test another #
-		System.out.println("Would you like to try again? Y/N: ");
+		System.out.print("Would you like to try again? Y/N: ");
 		tryAgain = inputHere.nextLine();
 				
 		//this will end or restart the method depending on user input
