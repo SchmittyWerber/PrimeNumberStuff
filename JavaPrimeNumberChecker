@@ -1,0 +1,105 @@
+package testerPack;
+
+//imports scanner util from libraries
+import java.util.Scanner;
+
+public class TestClass {
+	
+// ----------------------------------------------------------------------------------
+
+	//creates a scanner which can be used across methods to save space
+	public static Scanner inputHere = new Scanner(System.in);
+	
+// ----------------------------------------------------------------------------------
+
+	//right now all we do is open another method in the main method
+	public static void main(String[] args) {
+		TestClass.primeMethod();
+	}
+	
+// ----------------------------------------------------------------------------------
+
+	//used to determine if the entered characters are numeric
+	public static boolean isNumeric(String str)
+	{
+		try
+	    {
+	      double d = Double.parseDouble(str);
+	    }
+	    catch(NumberFormatException nfe)
+	    {
+	      return false;
+	    }
+	    return true;  
+	}
+	
+// ----------------------------------------------------------------------------------
+	
+	//this is where we take input for the prime and check it
+	static void primeMethod() {
+		//here we declare the scanner and variables
+		String primeInputStr ="";
+		double primeInput = 1;
+		double primeChecker = 2;
+		boolean result = false;
+		
+		//here is where we ask for and interpret user input
+		System.out.print("Enter a number here to determine if it's prime: ");
+		primeInputStr = inputHere.nextLine();
+		
+		//determines if only numeric characters were entered
+		if (isNumeric(primeInputStr) == false) {
+			System.out.println(primeInputStr + " is not a valid number.");
+			TestClass.tryAgain(); //asks the player if they would like to retry
+		}
+		//converts the user input into a double if they entered numeric characters
+		else primeInput = Double.parseDouble(primeInputStr);
+			
+		/*this loop divides the input by every number from 2 to the sqrt of itself and checks 
+		 * to see if there is a remainder. if there is no remainder we can infer the number 
+		 * is not prime as it is wholly divisible by a number other than 1 and it's own value*/
+		while (primeChecker <= Math.sqrt(primeInput) && primeInput != 1 && primeInput != 0) {
+			if (primeInput % primeChecker == 0) { 
+				result = false;
+				primeChecker = primeInput;
+			}
+			else {
+				result = true;
+				primeChecker = primeChecker + 1;
+			}		
+	    }
+		
+		//gives user feedback once the number has been determined to be prime or not
+		if (result == false) System.out.println("It is not prime.");
+		else System.out.println("It is prime.");
+		
+		//asks the player if they would like to retry
+		TestClass.tryAgain();	
+		}
+	
+// ----------------------------------------------------------------------------------
+	
+	static void tryAgain() {
+		String tryAgain="";
+
+		//here we interpret user input to see if they would like to test another #
+		System.out.println("Would you like to try again? Y/N: ");
+		tryAgain = inputHere.nextLine();
+				
+		//this will end or restart the method depending on user input
+		if (tryAgain.equalsIgnoreCase("yes") || tryAgain.equalsIgnoreCase("y")) {
+			System.out.println("Launching application...\n");
+			TestClass.primeMethod();
+		}
+		else if (tryAgain.equalsIgnoreCase("no") || tryAgain.equalsIgnoreCase("n")) {
+			System.out.println("Closing application...");
+			System.out.println("Goodbye.");
+			System.exit(0);
+		}
+		else {
+			System.out.println(tryAgain + " is an invalid selection. "
+					+ "Closing application...");
+			System.exit(0);
+		}
+	}
+}
